@@ -1,0 +1,55 @@
+---
+- name: Установка веб-сервера с помощью Ansible
+  hosts: localhost
+  connection: local
+  become: true
+
+  tasks:
+    - name: Обновление списка пакетов
+      package:
+        name: '*'
+        state: latest
+
+    - name: Установка Nginx, MySQL и PHP
+      package:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - nginx
+        - mysql-server
+        - php-fpm
+        - php-mysql
+        - php-cli
+        - php-common
+        - php-curl
+        - php-gd
+        - php-xml
+        - php-mbstring
+
+    - name: Создание каталога для сайта
+      file:
+        path: "/var/www/html"
+        state: directory
+
+    - name: Копирование phpinfo.php в каталог сайта
+      template:
+        src: phpinfo.php.j2
+        dest: "/var/www/html/phpinfo.php"
+
+    - name: Получение версии PHP
+      shell: php -r "echo PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION;"
+      register: php_version
+      changed_when: false
+      failed_when: false
+
+    - name: Конфигурация Nginx
+      template:
+        src: nginx.conf.j2
+        dest: "/etc/nginx/sites-available/default"
+      notify: Restart Nginx
+
+  handlers:
+    - name: Restart Nginx
+      service:
+        name: nginx
+        state: restarted
