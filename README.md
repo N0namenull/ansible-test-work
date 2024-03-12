@@ -18,4 +18,12 @@ git clone https://github.com/N0namenull/ansible-test-work.git
 cd ansible-test-work
 sudo ansible-playbook playbook.yml
 ```
+##Usage
+
+You can check result by visiting http://localhost/phpinfo.php
+ or by CLI
+```bash
+curl http://localhost/phpinfo.php
+```
+
 ### You`re awesome!
