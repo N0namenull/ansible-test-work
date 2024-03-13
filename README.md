@@ -8,6 +8,7 @@ Firstly you should update packages and then install ansible
 
 ```bash
 sudo apt update
+sudo apt upgrade
 sudo apt install ansible
 ```
 
