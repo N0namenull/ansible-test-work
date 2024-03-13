@@ -3,7 +3,7 @@ Test task for hiring
 
 ## Installation
 
-Firstly you should update packages and then install ansible
+Firstly you should update packages and install ansible
 
 
 ```bash
@@ -19,7 +19,7 @@ git clone https://github.com/N0namenull/ansible-test-work.git
 cd ansible-test-work
 sudo ansible-playbook playbook.yml
 ```
-##Usage
+## Usage
 
 You can check result by visiting http://localhost/phpinfo.php
  or by CLI
